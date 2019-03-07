@@ -43,7 +43,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	}
 }
 
-bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
+bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 {
 	//find the crosshair position
 	int32 ViewportSizeX, ViewportSizeY;
@@ -51,18 +51,42 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	FVector2D ScreenLocation;
 	ScreenLocation.X = ViewportSizeX * CrossHairXLocation;
 	ScreenLocation.Y = ViewportSizeY * CrossHairYLocation;
+	FVector LookDirection;
+	if (GetLookDirection(ScreenLocation, LookDirection)) {
+		//Line-trace along LookDirection
+		if (GetLookVectorHitLocation(LookDirection, HitLocation)) 
+		{
+			//TODO Check if hits
+		}
+	}
 
-	FVector PlayerLocation;
-	FRotator PlayerRotation;
-	FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
-	FHitResult OutHit;
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(PlayerLocation, PlayerRotation); //setting PlayerLocation and PlayerRotation
-	bool HitResult = GetWorld()->LineTraceSingleByChannel(OutHit, PlayerLocation + PlayerRotation.Vector(), 
-		PlayerLocation + (PlayerRotation.Vector() * 1000), ECC_PhysicsBody,
-		TraceParameters);
-	OutHitLocation = OutHit.Location;
-	UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *OutHitLocation.ToString());
-	return HitResult;
+	return true;
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector & HitLocation) const
+{
+	FHitResult HitResult;
+	auto CameraLocation = PlayerCameraManager->GetCameraLocation();
+	auto EndLocation = CameraLocation + (LookDirection * LineTraceRange);
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, 
+		CameraLocation,
+		EndLocation, 
+		ECC_Visibility))
+	{
+		HitLocation = HitResult.Location;
+		return true;
+	}
+	HitLocation = FVector(0);
+	return false;
+}
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const
+{
+	FVector CameraWorldLocation; //not needed
+	return DeprojectScreenPositionToWorld(ScreenLocation.X,
+		ScreenLocation.Y,
+		CameraWorldLocation,
+		LookDirection);
 }
 
 
