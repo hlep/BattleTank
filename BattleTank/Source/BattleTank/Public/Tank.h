@@ -45,7 +45,7 @@ private:
 
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float LaunchSpeed = 80000;
+		float LaunchSpeed = 8000;
 
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
