@@ -32,12 +32,12 @@ private:
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 
-	UPROPERTY(EditAnywhere) //where the crosshair anchor is located by X
+	UPROPERTY(EditDefaultsOnly) //where the crosshair anchor is located by X
 		float CrossHairXLocation = 0.5; 
 
-	UPROPERTY(EditAnywhere) //where the crosshair anchor is located by Y
+	UPROPERTY(EditDefaultsOnly) //where the crosshair anchor is located by Y
 		float CrossHairYLocation = 0.33333333; 
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		float LineTraceRange = 1000000;
 };
