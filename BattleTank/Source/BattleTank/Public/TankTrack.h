@@ -20,9 +20,17 @@ public:
 	// Sets a throttle between -1 and 1
 	UFUNCTION(BlueprintCallable)
 	void SetThrottle(float Throttle);
+
+	UFUNCTION(BlueprintCallable)
+		void Brake();
 	
 	//Max force per track in Newtons
 	UPROPERTY(EditDefaultsOnly)
-		float TrackMaxDrivingForce = 1111200;
+		float TrackMaxDrivingForce = 40000000;
 
+	UPROPERTY(EditDefaultsOnly)
+		float TrackBreakForce = 4000000;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsReverse = false;
 };
