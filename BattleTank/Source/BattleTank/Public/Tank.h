@@ -7,6 +7,7 @@
 #include "Tank.generated.h"
 
 // Forward Declarations
+class UTankMovementComponent;
 class UTankAimingComponent;
 class UTankBarrel; 
 class UTankTurret;
@@ -36,13 +37,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
+
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 private:	
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float LaunchSpeed = 8000;
