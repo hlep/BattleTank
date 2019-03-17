@@ -9,7 +9,7 @@
 class UTankTrack;
 
 /**
- * Responsivle from driving the tank tracks
+ * Responsible for driving the tank tracks
  */
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
@@ -20,6 +20,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = Movement)
 	void IntendMoveForward(float Throw);
+
+	UFUNCTION(BlueprintCallable, Category = Movement)
+	void IntendTurnRight(float Throw);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
