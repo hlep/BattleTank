@@ -25,6 +25,5 @@ private:
 	ATank* PlayerTank = nullptr;
 
 	// How close can the AI tank get
-	UPROPERTY(EditDefaultsOnly)
-	float AcceptanceRadius = 3000; //TODO Check radius is in cm
+	float AcceptanceRadius = 30; //TODO Check radius is in cm
 };
