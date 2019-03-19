@@ -8,6 +8,15 @@
 #include "CoreMinimal.h"
 #include "TankAimingComponent.generated.h"
 
+// ENUM declaration
+UENUM()
+enum class EFiringStatus : uint8
+{
+	Reloading,
+	Aiming,
+	Locked
+};
+
 // Forward Declaration
 class UTankBarrel; 
 class UTankTurret;
@@ -31,6 +40,11 @@ public:
 	void SetTurretReference(UTankTurret* TurretToSet);
 
 	void MoveBarrelTowards(FVector AimDirection);
+
+protected:
+
+	UPROPERTY(BlueprintReadOnly, Category = "Status")
+	EFiringStatus FiringStatus = EFiringStatus::Reloading;
 
 private:
 

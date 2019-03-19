@@ -20,11 +20,14 @@ public:
 
 	void Tick(float DeltaTime) override;
 
+protected:
+
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	ATank* GetControlledTank() const;
+
 private:
 
 	void AimTowardsCrosshair();
-
-	ATank* GetControlledTank() const;
 
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 
