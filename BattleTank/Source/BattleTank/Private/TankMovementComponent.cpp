@@ -1,5 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+//  Do What The Fuck You Want To Public License
 #include "TankMovementComponent.h"
 #include "TankTrack.h"
 #include "../Public/TankMovementComponent.h"
@@ -27,6 +26,7 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 	if (!LeftTrack || !RightTrack) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
+	//TODO prevent double-speed due to double controls
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw)

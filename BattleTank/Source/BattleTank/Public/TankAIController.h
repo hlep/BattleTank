@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Do What The Fuck You Want To Public License
 
 #pragma once
 
@@ -25,5 +25,5 @@ private:
 	ATank* PlayerTank = nullptr;
 
 	// How close can the AI tank get
-	float AcceptanceRadius = 30; //TODO Check radius is in cm
+	float AcceptanceRadius = 1500;
 };
