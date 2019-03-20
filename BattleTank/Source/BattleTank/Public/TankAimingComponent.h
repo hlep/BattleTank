@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Do What The Fuck You Want To Public License
 
 #pragma once
 
@@ -31,13 +31,12 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
 public:	
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
-	
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	void SetTurretReference(UTankTurret* TurretToSet);
 
 	void MoveBarrelTowards(FVector AimDirection);
 
