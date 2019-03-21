@@ -15,12 +15,12 @@ void ATankAIController::BeginPlay()
 
 	if (ControlledTank == nullptr)
 	{
-		UE_LOG(LogTemp, Error, TEXT("AIController didn't find a tank!")); //log an error
+		UE_LOG(LogTemp, Error, TEXT("4c21: AIController didn't find a tank!")); //log an error
 	}
 
 	if (PlayerTank == nullptr)
 	{
-		UE_LOG(LogTemp, Error, TEXT("PlayerTank not found")); //log an error
+		UE_LOG(LogTemp, Error, TEXT("4c21: PlayerTank not found")); //log an error
 	}
 
 }

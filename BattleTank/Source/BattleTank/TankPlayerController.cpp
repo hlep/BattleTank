@@ -9,11 +9,11 @@ void ATankPlayerController::BeginPlay()
 	ATank* ControlledTank = GetControlledTank();
 	if (!ControlledTank)
 	{
-		UE_LOG(LogTemp, Error, TEXT("PlayerController didn't find a tank!")); //log an error
+		UE_LOG(LogTemp, Error, TEXT("4c21: PlayerController didn't find a tank!")); //log an error
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController possessing: %s"), *(ControlledTank->GetName()));
+		UE_LOG(LogTemp, Warning, TEXT("4c21: PlayerController possessing: %s"), *(ControlledTank->GetName()));
 	}
 }
 
