@@ -7,7 +7,6 @@
 #include "Tank.generated.h"
 
 // Forward Declarations
-class UTankMovementComponent;
 class UTankAimingComponent;
 class UTankBarrel; 
 class UTankTurret;
@@ -33,9 +32,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;

@@ -1,7 +1,6 @@
 // Do What The Fuck You Want To Public License
 
 #include "Tank.h"
-#include "TankMovementComponent.h"
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
@@ -37,14 +36,15 @@ void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 
 void ATank::AimAt(FVector HitLocation)
 {
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
 {
+	if (!ensure(Barrel)) {return;}
 	bool bIsReloaded = (GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTime;
-	if (Barrel && bIsReloaded) 
+	if (bIsReloaded) 
 	{
 		// Spawn a projectile at the socket of the Barrel
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint,
