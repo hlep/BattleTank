@@ -2,21 +2,12 @@
 
 #include "TankPlayerController.h"
 #include "TankAimingComponent.h"
-#include "Tank.h"
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	ATank* ControlledTank = GetControlledTank();
-	if (!ensure(ControlledTank))
-	{
-		UE_LOG(LogTemp, Error, TEXT("4c21: PlayerController didn't find a tank!")); //log an error
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("4c21: PlayerController possessing: %s"), *(ControlledTank->GetName()));
-	}
-	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+
+	AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (ensure(AimingComponent)) { FoundAimingComponent(AimingComponent); }
 	else
 	{
@@ -32,20 +23,15 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimTowardsCrosshair();
 }
 
-ATank* ATankPlayerController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!ensure(GetControlledTank())) { return; }
+	if (!ensure(GetPawn())) { return; }
 
 	FVector HitLocation; //out parameter
 
 	if (GetSightRayHitLocation(HitLocation)) //tells controlled tank to aim at the point if it hits the landscape
 	{
-		GetControlledTank()->AimAt(HitLocation);
+		AimingComponent->AimAt(HitLocation);
 	}
 }
 

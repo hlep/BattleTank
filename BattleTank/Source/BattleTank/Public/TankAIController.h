@@ -6,7 +6,8 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class ATank; // Forward declaration
+// Forward declaration
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
@@ -20,9 +21,10 @@ public:
 	void Tick(float DeltaTime) override;
 
 private:
-	
-	ATank* ControlledTank = nullptr;
-	ATank* PlayerTank = nullptr;
+
+	APawn* PlayerTank = nullptr;
+
+	UTankAimingComponent* AimingComponent = nullptr;
 
 	// How close can the AI tank get
 	float AcceptanceRadius = 1500;

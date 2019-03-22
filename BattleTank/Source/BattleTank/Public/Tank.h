@@ -7,7 +7,6 @@
 #include "Tank.generated.h"
 
 // Forward Declarations
-class UTankAimingComponent;
 class UTankBarrel; 
 class UTankTurret;
 class AProjectile;
@@ -24,8 +23,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
-	void AimAt(FVector HitLocation);
-
 	UFUNCTION(BlueprintCallable, Category = "Custom")
 		void Fire();
 
@@ -33,14 +30,12 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
-
 private:	
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	//TODO remove once firing is moved
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float LaunchSpeed = 8000;
 

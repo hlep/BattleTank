@@ -1,7 +1,6 @@
 // Do What The Fuck You Want To Public License
 
 #include "Tank.h"
-#include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
 #include "../Public/Tank.h"
@@ -11,15 +10,12 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
-	UE_LOG(LogTemp, Warning, TEXT("4c21: Tank construct cpp launched!"));
 }
 
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("4c21: Tank BeginPlay() cpp launched!"));
 }
 
 // Called to bind functionality to input
@@ -34,12 +30,6 @@ void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 	Barrel = BarrelToSet;
 }
 
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(TankAimingComponent)) { return; }
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-}
-
 void ATank::Fire()
 {
 	if (!ensure(Barrel)) {return;}
@@ -52,9 +42,6 @@ void ATank::Fire()
 			Barrel->GetSocketRotation("Projectile"));
 
 		Projectile->LaunchProjectile(LaunchSpeed);
-
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("4c21: %f: Tank Firing!"), Time);
 		LastFireTime = GetWorld()->GetTimeSeconds();
 	}
 }

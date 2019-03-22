@@ -2,24 +2,23 @@
 
 #include "TankAIController.h"
 #include "BattleTank.h"
-#include "Tank.h"
+#include "TankAimingComponent.h"
 #include "../Public/TankAIController.h"
-#include "GameFramework/Actor.h"
 // Depends on movement component via pathfinding system
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ControlledTank = Cast<ATank>(GetPawn());;
-	PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+	AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 
-	if (ControlledTank == nullptr)
+	if (!ensure(AimingComponent))
 	{
-		UE_LOG(LogTemp, Error, TEXT("4c21: AIController didn't find a tank!")); //log an error
+		UE_LOG(LogTemp, Error, TEXT("4c21: AIController can't find aiming component at BeginPlay"));
 	}
 
-	if (PlayerTank == nullptr)
+	if (!ensure(PlayerTank))
 	{
 		UE_LOG(LogTemp, Error, TEXT("4c21: PlayerTank not found")); //log an error
 	}
@@ -35,8 +34,9 @@ void ATankAIController::Tick(float DeltaTime)
 		MoveToActor(PlayerTank, AcceptanceRadius);
 
 		//Aim towards the player
-		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+		AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
-		ControlledTank->Fire(); // TODO limit firing rate
+		//TODO un-comment when fire is moved
+		//Cast<ATank>(GetPawn())->Fire();
 	}
 }

@@ -36,7 +36,7 @@ public:
 
 public:	
 
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	void AimAt(FVector HitLocation);
 
 	void MoveBarrelTowards(FVector AimDirection);
 
@@ -50,5 +50,8 @@ private:
 	UTankBarrel* Barrel = nullptr;
 
 	UTankTurret* Turret = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing") // TODO check if it works with the AimingComponent
+		float LaunchSpeed = 8000;
 
 };

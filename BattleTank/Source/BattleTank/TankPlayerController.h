@@ -8,7 +8,6 @@
 #include "TankPlayerController.generated.h"
 
 // Forward declarations
-class ATank; 
 class UTankAimingComponent;
 
 UCLASS()
@@ -24,9 +23,6 @@ public:
 
 protected:
 
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
-
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimingComponentRef);
 
@@ -39,6 +35,8 @@ private:
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
+
+	UTankAimingComponent* AimingComponent = nullptr;
 
 	UPROPERTY(EditDefaultsOnly) //where the crosshair anchor is located by X
 		float CrossHairXLocation = 0.5; 
