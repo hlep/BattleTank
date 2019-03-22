@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Do What The Fuck You Want To Public License
 
 #include "TankAIController.h"
 #include "BattleTank.h"
@@ -36,7 +36,6 @@ void ATankAIController::Tick(float DeltaTime)
 		//Aim towards the player
 		AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
-		//TODO un-comment when fire is moved
-		//Cast<ATank>(GetPawn())->Fire();
+		AimingComponent->Fire();
 	}
 }
