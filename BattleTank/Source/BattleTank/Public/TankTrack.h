@@ -17,6 +17,8 @@ class BATTLETANK_API UTankTrack : public UStaticMeshComponent
 	
 public:
 
+	UTankTrack();
+
 	// Sets a throttle between -1 and 1
 	UFUNCTION(BlueprintCallable)
 	void SetThrottle(float Throttle);
@@ -33,4 +35,8 @@ public:
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsReverse = false;
+
+private:
+
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction) override;
 };
