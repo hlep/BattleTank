@@ -40,7 +40,6 @@ void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
 
 void UTankTrack::SetThrottle(float Throttle)
 {
-	// TODO clamp actual throttle value
 	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 1);
 }
 

@@ -42,6 +42,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Custom")
 	void Fire();
 
+	EFiringStatus GetFiringStatus() const;
+
 protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Status")
