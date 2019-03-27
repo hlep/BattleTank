@@ -23,12 +23,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetThrottle(float Throttle);
 
+	void DriveTrack();
+
 	UFUNCTION(BlueprintCallable)
 		void Brake();
 	
 	//Max force per track in Newtons
 	UPROPERTY(EditDefaultsOnly)
-		float TrackMaxDrivingForce = 25000000;
+		float TrackMaxDrivingForce = 40000000;
 
 	UPROPERTY(EditDefaultsOnly)
 		float TrackBreakForce = 4000000;
@@ -38,5 +40,13 @@ public:
 
 private:
 
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction) override;
+	virtual void BeginPlay() override;
+
+	void ApplySidewaysForce();
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, 
+		FVector NormalImpulse, const FHitResult & Hit);
+
+	float CurrentThrottle = 0;
 };
