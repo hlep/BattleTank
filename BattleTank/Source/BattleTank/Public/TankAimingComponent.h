@@ -14,7 +14,8 @@ enum class EFiringStatus : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 // Forward Declaration
@@ -41,6 +42,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Custom")
 	void Fire();
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	uint8 GetAmmoLeft() const;
 
 	EFiringStatus GetFiringStatus() const;
 
@@ -73,6 +77,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	uint8 AmmoLeft = 3;
 
 	float LastFireTime = 0;
 };
