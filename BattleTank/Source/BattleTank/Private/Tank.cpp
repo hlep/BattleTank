@@ -14,4 +14,16 @@ ATank::ATank()
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
 }
+
+float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	int32 DamagePoints = FMath::RoundToInt(DamageAmount); // For better use in UI and comparison to 0
+
+	DamagePoints = FMath::Clamp(DamagePoints, 0, CurrentHealth);
+	UE_LOG(LogTemp, Warning, TEXT("got damaged for: %i"), DamagePoints);
+	CurrentHealth -= DamagePoints;
+	return DamagePoints;
+}
+
