@@ -17,6 +17,8 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
+	virtual void BeginPlay() override;
+
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
 		class AController* EventInstigator, AActor* DamageCauser) override;
 
@@ -35,6 +37,6 @@ private:
 	int32 MaxHealth = 500;
 
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
-	int32 CurrentHealth = MaxHealth;
+	int32 CurrentHealth = 0;
 
 };
