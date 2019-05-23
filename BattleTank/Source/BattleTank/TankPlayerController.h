@@ -28,6 +28,8 @@ protected:
 
 private:
 
+	virtual void SetPawn(APawn* InPawn) override;
+
 	void AimTowardsCrosshair();
 
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
@@ -37,6 +39,9 @@ private:
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 
 	UTankAimingComponent* AimingComponent = nullptr;
+
+	UFUNCTION()
+	void OnTankDeath();
 
 	UPROPERTY(EditDefaultsOnly) //where the crosshair anchor is located by X
 		float CrossHairXLocation = 0.5; 

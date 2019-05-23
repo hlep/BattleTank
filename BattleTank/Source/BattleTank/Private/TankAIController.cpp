@@ -3,7 +3,9 @@
 #include "TankAIController.h"
 #include "BattleTank.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
 #include "../Public/TankAIController.h"
+
 // Depends on movement component via pathfinding system
 
 void ATankAIController::BeginPlay()
@@ -23,6 +25,26 @@ void ATankAIController::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("4c21: PlayerTank not found")); //log an error
 	}
 
+}
+
+
+void ATankAIController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn) 
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		//Subscribe local method to the tank's death event
+		PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
+	}
+}
+
+
+void ATankAIController::OnTankDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Im dead"));
 }
 
 void ATankAIController::Tick(float DeltaTime)

@@ -24,11 +24,15 @@ float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEve
 	DamagePoints = FMath::Clamp(DamagePoints, 0, CurrentHealth);
 	UE_LOG(LogTemp, Warning, TEXT("got damaged for: %i"), DamagePoints);
 	CurrentHealth -= DamagePoints;
+	if(CurrentHealth <= 0)
+	{
+		OnTankDeath.Broadcast();
+	}
 	return DamagePoints;
 }
 
 float ATank::GetHealthPercent()
 {
-	return CurrentHealth / MaxHealth;
+	return (float)CurrentHealth / (float)MaxHealth;
 }
 
