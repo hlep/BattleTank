@@ -76,5 +76,5 @@ Plugins/*/Intermediate/*
 # Cache files for the editor to use
 DerivedDataCache/*
 
-#Added content from Open World Demo Collection
-Content/KiteDemo/*
+#Experimental stuff
+Content/Experimental/*
