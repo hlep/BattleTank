@@ -41,7 +41,7 @@ void ATankPlayerController::SetPawn(APawn* InPawn)
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!ensure(GetPawn())) { return; }
+	if (!GetPawn()) { return; }
 
 	FVector HitLocation; //out parameter
 
